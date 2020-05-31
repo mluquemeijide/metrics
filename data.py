@@ -27,16 +27,7 @@ def job_category(cargo):
             return 'Estudiante'
     return 'Otro'
 
-
-
-if __name__ == "__main__":
-    print("Starts Here.")
-
-    df = pd.read_excel('./data_sets/event_data.xlsx')
-
-    print("Here it goes.")
-
-    # Select for COUNTRY analysis
+def graph_by_country(df):
     print()
     print("******** Divided by Country *********")
     #
@@ -57,6 +48,8 @@ if __name__ == "__main__":
     plt.show()
 
     print()
+
+def graph_by_job(df):
     print("********* Divided by job *************")
 
     job = (df['Cargo'].apply(job_category)).value_counts()
@@ -74,5 +67,48 @@ if __name__ == "__main__":
     plt.show()
 
     print()
-    print('********** Empresas **************')
-    print(df['Empresa'].value_counts())
+
+def list_by_enterprise(df):
+        print('********** Empresas **************')
+        print(df['Empresa'].value_counts())
+        print()
+
+if __name__ == "__main__":
+    print()
+    print()
+    print("#####################################################################################")
+    print("##                                                                                 ##")
+    print("##     $       $    $$$$$$$    $$$$$$$$$$$     $$$$$$    $    $$$$$$$   $$$$$$$    ##      ")
+    print("##     $ $   $ $    $               $          $    $    $    $         $          ##      ")
+    print("##     $   $   $    $$$$$$$         $          $$$$$$    $    $         $$$$$$$    ##      ")
+    print("##     $       $    $               $          $ $$      $    $               $    ##      ")
+    print("##     $       $    $$$$$$$         $          $   $$    $    $$$$$$$   $$$$$$$    ##      ")
+    print("##                                                                                 ##")
+    print("#####################################################################################")
+    print("                              Hecho por Manu Luque")
+    print()
+
+    print("Bienvenido/a")
+    print("Ingrese el nombre del archivo a analizar: ", end = "")
+    file_name = input()
+    df = pd.read_excel('./data_sets/' + file_name + '.xlsx')
+
+    print("Elija una opcion:")
+    print("     1) Listar y graficar por pais.")
+    print("     2) Listar y graficar por rol.")
+    print("     3) Listar por empresa.")
+    print("     4) Salir")
+
+    chosen_option = input()
+
+    if chosen_option == '1':
+        graph_by_country(df)
+    elif chosen_option == '2':
+        graph_by_job(df)
+    elif chosen_option == '3':
+        list_by_enterprise(df)
+    else:
+        print("Hasta luego!")
+        exit()
+
+    #graph_by_country(df)
