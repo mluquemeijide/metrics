@@ -70,6 +70,7 @@ def graph_by_country(df):
         print()
     else:
         pass
+
     plt.show()
 
 
@@ -94,8 +95,24 @@ def graph_by_job(df):
     numeric_index = 0
     for index in job.index.tolist():
         plt.text(numeric_index, job.at[index]+1, job.at[index], horizontalalignment="center")
-        print(job.at[index])
         numeric_index += 1
+
+    print()
+    print("Guardar archivo?")
+    print("     1) Si")
+    print("     2) No")
+    print()
+    print("Opcion elegida: ", end = '')
+    choice = input()
+    if choice == '1' or 's' in choice:
+        print("Ingrese nombre del archivo para guardar (se guardara en formato png): ", end = '')
+        rename = input()
+        plt.savefig(rename, transparent=False)
+        print()
+        print("Archivo guardado con exito.")
+        print()
+    else:
+        pass
 
     plt.show()
 
