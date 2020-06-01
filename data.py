@@ -45,9 +45,25 @@ def graph_by_country(df):
     print(df_country)
 
     df_country.plot.bar()
-    plt.show()
+    plt.style.use("ggplot")
 
     print()
+    print("Guardar archivo?")
+    print("     1) Si")
+    print("     2) No")
+    print()
+    choice = input()
+    if choice == '1' or 's' in choice:
+        print("Ingrese nombre del archivo para guardar (se guardara en formato png): ", end = '')
+        rename = input()
+        plt.savefig(rename, transparent=False)
+        print()
+        print("Archivo guardado con exito.")
+        print()
+    else:
+        pass
+    plt.show()
+
 
 def graph_by_job(df):
     print("********* Divided by job *************")
@@ -69,9 +85,27 @@ def graph_by_job(df):
     print()
 
 def list_by_enterprise(df):
-        print('********** Empresas **************')
-        print(df['Empresa'].value_counts())
-        print()
+    print('********** Empresas **************')
+    print(df['Empresa'].value_counts())
+    print()
+
+def list_webex_only(df):
+
+
+    webex_list = ((df[df['webex'].notnull()])['webex']).tolist()
+
+    webex_assistants = pd.DataFrame()
+
+
+    for index, row in df.iterrows():
+        if row['Correo electrónico'] in webex_list:
+            webex_assistants = webex_assistants.append(row)
+
+    print(webex_assistants["Correo electrónico"])
+    print()
+
+    return webex_assistants
+
 
 if __name__ == "__main__":
     print()
@@ -90,25 +124,40 @@ if __name__ == "__main__":
 
     print("Bienvenido/a")
     print("Ingrese el nombre del archivo a analizar: ", end = "")
-    file_name = input()
+
+    #file_name = input()
+    file_name = 'event_data'
     df = pd.read_excel('./data_sets/' + file_name + '.xlsx')
+    get_out = False
 
-    print("Elija una opcion:")
-    print("     1) Listar y graficar por pais.")
-    print("     2) Listar y graficar por rol.")
-    print("     3) Listar por empresa.")
-    print("     4) Salir")
+    while(not get_out):
 
-    chosen_option = input()
+        print()
+        print("-------------------------------------------------------")
+        print("| Elija una opcion:                                    |")
+        print("|     1) Listar y graficar por pais.                   |")
+        print("|     2) Listar y graficar por rol.                    |")
+        print("|     3) Listar por empresa.                           |")
+        print("|     4) Listar solo asistentes al evento              |")
+        print("|     5) Salir                                         |")
+        print("-------------------------------------------------------")
 
-    if chosen_option == '1':
-        graph_by_country(df)
-    elif chosen_option == '2':
-        graph_by_job(df)
-    elif chosen_option == '3':
-        list_by_enterprise(df)
-    else:
-        print("Hasta luego!")
-        exit()
+        print("Opcion elegida: ", end = '')
+        chosen_option = input()
+        print()
+
+        if chosen_option == '1':
+            graph_by_country(df)
+        elif chosen_option == '2':
+            graph_by_job(df)
+        elif chosen_option == '3':
+            list_by_enterprise(df)
+        elif chosen_option == '4':
+            webex_assistants = list_webex_only(df)
+        else:
+            print("Hasta luego!")
+            print()
+            get_out = True
+            exit()
 
     #graph_by_country(df)
