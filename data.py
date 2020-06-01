@@ -46,12 +46,17 @@ def graph_by_country(df):
 
     df_country.plot.bar()
     plt.style.use("ggplot")
+    plt.suptitle('Cantidad de asistentes por país')
+    plt.subplots_adjust(left=0.1, bottom=0.2, right=0.8, top=0.9)
+    plt.xticks(size = 'small', color = 'b', rotation = 45)
+
 
     print()
     print("Guardar archivo?")
     print("     1) Si")
     print("     2) No")
     print()
+    print("Opcion elegida: ", end = '')
     choice = input()
     if choice == '1' or 's' in choice:
         print("Ingrese nombre del archivo para guardar (se guardara en formato png): ", end = '')
@@ -80,6 +85,10 @@ def graph_by_job(df):
     print(job)
 
     job.plot.bar()
+    plt.suptitle('Cantidad de asistentes por rol')
+    plt.subplots_adjust(left=0.1, bottom=0.2, right=0.8, top=0.9)
+    plt.xticks(size = 'small', color = 'b', rotation = 45)
+
     plt.show()
 
     print()
@@ -119,7 +128,7 @@ if __name__ == "__main__":
     print("##     $       $    $$$$$$$         $          $   $$    $    $$$$$$$   $$$$$$$    ##      ")
     print("##                                                                                 ##")
     print("#####################################################################################")
-    print("                              Hecho por Manu Luque")
+    #print("                              Hecho por Manu Luque")
     print()
 
     print("Bienvenido/a")
@@ -129,6 +138,10 @@ if __name__ == "__main__":
     file_name = 'event_data'
     df = pd.read_excel('./data_sets/' + file_name + '.xlsx')
     get_out = False
+
+    print()
+    print("Datos cargados y listos.......")
+    print()
 
     while(not get_out):
 
@@ -144,6 +157,7 @@ if __name__ == "__main__":
 
         print("Opcion elegida: ", end = '')
         chosen_option = input()
+        #chosen_option = '2'
         print()
 
         if chosen_option == '1':
