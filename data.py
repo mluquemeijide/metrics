@@ -49,7 +49,10 @@ def graph_by_country(df):
     plt.suptitle('Cantidad de asistentes por país')
     plt.subplots_adjust(left=0.1, bottom=0.2, right=0.8, top=0.9)
     plt.xticks(size = 'small', color = 'b', rotation = 45)
-
+    numeric_index = 0
+    for index in df_country.index.tolist():
+        plt.text(numeric_index, df_country.at[index]+1, df_country.at[index], horizontalalignment="center")
+        numeric_index += 1
 
     print()
     print("Guardar archivo?")
@@ -88,6 +91,11 @@ def graph_by_job(df):
     plt.suptitle('Cantidad de asistentes por rol')
     plt.subplots_adjust(left=0.1, bottom=0.2, right=0.8, top=0.9)
     plt.xticks(size = 'small', color = 'b', rotation = 45)
+    numeric_index = 0
+    for index in job.index.tolist():
+        plt.text(numeric_index, job.at[index]+1, job.at[index], horizontalalignment="center")
+        print(job.at[index])
+        numeric_index += 1
 
     plt.show()
 
@@ -99,18 +107,15 @@ def list_by_enterprise(df):
     print()
 
 def list_webex_only(df):
-
-
     webex_list = ((df[df['webex'].notnull()])['webex']).tolist()
-
     webex_assistants = pd.DataFrame()
-
 
     for index, row in df.iterrows():
         if row['Correo electrónico'] in webex_list:
             webex_assistants = webex_assistants.append(row)
 
-    print(webex_assistants["Correo electrónico"])
+
+    print(webex_assistants[['Nombre', 'Correo electrónico']])
     print()
 
     return webex_assistants
