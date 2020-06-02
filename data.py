@@ -13,7 +13,9 @@ teacher = ['prof', 'docente']
 student = ['estudiante', 'alum', 'student']
 
 def lowercase_country(nombre_pais):
-    return nombre_pais.lower()
+    nombre_pais_list = list(nombre_pais.lower())
+    nombre_pais_list[0] = nombre_pais_list[0].upper()
+    return ''.join(nombre_pais_list)
 
 def job_category(cargo):
     for dev_category in dev:
@@ -43,9 +45,8 @@ def graph_by_country(df):
     print()
 
     print(df_country)
-
-    df_country.plot.bar()
     plt.style.use("ggplot")
+    df_country.plot.bar()
     plt.suptitle('Cantidad de asistentes por país')
     plt.subplots_adjust(left=0.1, bottom=0.2, right=0.8, top=0.9)
     plt.xticks(size = 'small', color = 'b', rotation = 45)
