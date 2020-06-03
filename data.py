@@ -74,6 +74,25 @@ def graph_by_country(df):
 
     plt.show()
 
+    print()
+    print("Exportar tabla a un excel?")
+    print("     1) Si")
+    print("     2) No")
+    print()
+    print("Opcion elegida: ", end = '')
+    choice = input()
+    if choice == '1' or 's' in choice:
+        print("Ingrese nombre del archivo para guardar: ", end = '')
+        rename = input()
+        rename += '.xlsx'
+        print('File name is: ' + rename)
+        df_country.to_excel(rename)
+        print()
+        print("Archivo exportado con exito.")
+        print()
+    else:
+        pass
+
 
 def graph_by_job(df):
     print("********* Divided by job *************")
@@ -89,6 +108,7 @@ def graph_by_job(df):
 
     print(job)
 
+    plt.style.use("ggplot")
     job.plot.bar()
     plt.suptitle('Cantidad de asistentes por rol')
     plt.subplots_adjust(left=0.1, bottom=0.2, right=0.8, top=0.9)
@@ -116,6 +136,25 @@ def graph_by_job(df):
         pass
 
     plt.show()
+
+    print()
+    print("Exportar tabla a un excel?")
+    print("     1) Si")
+    print("     2) No")
+    print()
+    print("Opcion elegida: ", end = '')
+    choice = input()
+    if choice == '1' or 's' in choice:
+        print("Ingrese nombre del archivo para guardar: ", end = '')
+        rename = input()
+        rename += '.xlsx'
+        print('File name is: ' + rename)
+        job.to_excel(rename)
+        print()
+        print("Archivo exportado con exito.")
+        print()
+    else:
+        pass
 
     print()
 
@@ -196,5 +235,3 @@ if __name__ == "__main__":
             print()
             get_out = True
             exit()
-
-    #graph_by_country(df)
