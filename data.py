@@ -80,7 +80,7 @@ def graph_by_country(df):
         numeric_index += 1
 
     print()
-    print("Guardar archivo?")
+    print("Guardar gráfico?")
     print("     1) Si")
     print("     2) No")
     print()
@@ -126,7 +126,7 @@ def graph_by_job(df):
         numeric_index += 1
 
     print()
-    print("Guardar archivo?")
+    print("Guardar gráfico?")
     print("     1) Si")
     print("     2) No")
     print()
