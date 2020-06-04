@@ -187,8 +187,8 @@ if __name__ == "__main__":
     print("Bienvenido/a")
     print("Ingrese el nombre del archivo a analizar: ", end = "")
 
-    #file_name = input()
-    file_name = 'event_data'
+    file_name = input()
+    #file_name = 'event_data'
     df = pd.read_excel('./data_sets/' + file_name + '.xlsx')
     get_out = False
 
