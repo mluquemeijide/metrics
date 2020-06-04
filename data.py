@@ -50,6 +50,7 @@ def export_to_excel(data):
         pass
 
 def complete_analysis(df):
+
     return
 
 def graph_by_country(df):
