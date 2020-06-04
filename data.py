@@ -29,6 +29,29 @@ def job_category(cargo):
             return 'Estudiante'
     return 'Otro'
 
+def export_to_excel(data):
+    print()
+    print("Exportar tabla a un excel?")
+    print("     1) Si")
+    print("     2) No")
+    print()
+    print("Opcion elegida: ", end = '')
+    choice = input()
+    if choice == '1' or 's' in choice:
+        print("Ingrese nombre del archivo para guardar: ", end = '')
+        rename = input()
+        rename += '.xlsx'
+        print('File name is: ' + rename)
+        data.to_excel(rename)
+        print()
+        print("Archivo exportado con exito.")
+        print()
+    else:
+        pass
+
+def complete_analysis(df):
+    return
+
 def graph_by_country(df):
     print()
     print("******** Divided by Country *********")
@@ -74,24 +97,7 @@ def graph_by_country(df):
 
     plt.show()
 
-    print()
-    print("Exportar tabla a un excel?")
-    print("     1) Si")
-    print("     2) No")
-    print()
-    print("Opcion elegida: ", end = '')
-    choice = input()
-    if choice == '1' or 's' in choice:
-        print("Ingrese nombre del archivo para guardar: ", end = '')
-        rename = input()
-        rename += '.xlsx'
-        print('File name is: ' + rename)
-        df_country.to_excel(rename)
-        print()
-        print("Archivo exportado con exito.")
-        print()
-    else:
-        pass
+    export_to_excel(df_country)
 
 
 def graph_by_job(df):
@@ -137,31 +143,15 @@ def graph_by_job(df):
 
     plt.show()
 
-    print()
-    print("Exportar tabla a un excel?")
-    print("     1) Si")
-    print("     2) No")
-    print()
-    print("Opcion elegida: ", end = '')
-    choice = input()
-    if choice == '1' or 's' in choice:
-        print("Ingrese nombre del archivo para guardar: ", end = '')
-        rename = input()
-        rename += '.xlsx'
-        print('File name is: ' + rename)
-        job.to_excel(rename)
-        print()
-        print("Archivo exportado con exito.")
-        print()
-    else:
-        pass
+    export_to_excel(job)
 
     print()
 
 def list_by_enterprise(df):
     print('********** Empresas **************')
-    print(df['Empresa'].value_counts())
-    print()
+    enterprise_list = df['Empresa'].value_counts()
+    print(enterprise_list)
+    export_to_excel(enterprise_list)
 
 def list_webex_only(df):
     webex_list = ((df[df['webex'].notnull()])['webex']).tolist()
@@ -173,7 +163,7 @@ def list_webex_only(df):
 
 
     print(webex_assistants[['Nombre', 'Correo electrónico']])
-    print()
+    export_to_excel(webex_assistants)
 
     return webex_assistants
 
@@ -210,11 +200,12 @@ if __name__ == "__main__":
         print()
         print("-------------------------------------------------------")
         print("| Elija una opcion:                                    |")
-        print("|     1) Listar y graficar por pais.                   |")
-        print("|     2) Listar y graficar por rol.                    |")
-        print("|     3) Listar por empresa.                           |")
-        print("|     4) Listar solo asistentes al evento              |")
-        print("|     5) Salir                                         |")
+        print("|     1) Análisis completo.                            |")
+        print("|     2) Listar y graficar por pais.                   |")
+        print("|     3) Listar y graficar por rol.                    |")
+        print("|     4) Listar por empresa.                           |")
+        print("|     5) Listar solo asistentes al evento              |")
+        print("|     6) Salir                                         |")
         print("-------------------------------------------------------")
 
         print("Opcion elegida: ", end = '')
@@ -223,12 +214,14 @@ if __name__ == "__main__":
         print()
 
         if chosen_option == '1':
-            graph_by_country(df)
+            complete_analysis(df)
         elif chosen_option == '2':
-            graph_by_job(df)
+            graph_by_country(df)
         elif chosen_option == '3':
-            list_by_enterprise(df)
+            graph_by_job(df)
         elif chosen_option == '4':
+            list_by_enterprise(df)
+        elif chosen_option == '5':
             webex_assistants = list_webex_only(df)
         else:
             print("Hasta luego!")
